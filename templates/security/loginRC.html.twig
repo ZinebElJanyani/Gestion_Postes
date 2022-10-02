@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion!{% endblock %}
+
+{% block body %}
+<style type="text/css">
+    body{
+        
+        background:url('../public/images/RC_img.jpg') fixed no-repeat;
+        min-height: 10vh;
+        background-size: cover;
+        color:white;    
+    } 
+    h1{
+        text-align: center;
+        color: white;
+    }
+    .well{
+        background:rgba(10,5,3,0.5);
+        border:none;
+        border-radius:15px/15px;
+        box-shadow:0px 10px 20px #446e9b 
+    }
+    #inputEmail ,#inputPassword{
+        background: rgba(10,5,3,0.4);
+        color:rgb(221, 243, 250);
+    }
+
+    label{
+        font-weight:bold;
+    }
+    .buttonHolder{ text-align: center; }
+
+    .navbar{
+        position: sticky;
+        top: 0;
+        z-index: 100;
+  }
+</style>
+<section class="container my-5  col-lg-offset-3 col-lg-6">
+    <div class="row ">
+        <div class="col h-100 ">
+            <form method="post" class="well" >
+                {% if error %}
+                    <div class="alert alert-dismissible alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="mb-3">
+                        Vous étes connecté(e) comme  {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                    </div>
+                {% endif %}
+
+                <h1 class="h2 mb-4 text-white">Se connecter</h1>
+               <div class="form-group my-1">
+                    <label for="inputEmail">E-mail</label>
+                     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+               </div>
+               
+                <div class="form-group my-1">
+                    <label for="inputPassword">Mot de passe</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                </div>
+                
+
+                <input type="hidden" name="_csrf_token"
+                    value="{{ csrf_token('authenticate') }}"
+                > 
+
+            
+                <div class="buttonHolder ">
+                    <button class="btn btn-lg btn-primary my-4 " type="submit">
+                    Se connecter
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

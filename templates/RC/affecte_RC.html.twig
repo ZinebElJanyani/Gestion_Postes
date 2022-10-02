@@ -1,0 +1,186 @@
+{% extends "RC/baseRC.html.twig" %}
+                
+    {% block ContentRC %}
+     <link href="css/bootstrap.css" rel="stylesheet">
+     <link href="css/_variables.scss" rel="stylesheet">
+    <link href="css/_bootswatch.scss" rel="stylesheet"> 
+    <style>
+      .bg{
+
+          width:100%;
+      }
+      h1{
+      text-align: center;
+      background: linear-gradient(359deg, #00ffe7 0%,#0200ff 100%);
+      font-size: 3em;
+      -webkit-background-clip :text;
+      -webkit-text-fill-color:transparent;
+      text-align : center;
+      font-weight:bold;
+      }
+      .navbar{
+          position: sticky;
+          top: 0;
+          z-index: 100;
+      }
+      </style>
+
+    <div id="wrapper">
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <div class="container-fluid" id="page-top">
+            <h1 class="h3 my-3">Affecter un poste à un employé</h1>
+            <p class="mb-4">Pour affecter un employé à un poste, vous devez d'abord sélectionner l'employé, puis un tableau des postes disponibles s'affichera, à partir duquel vous devrez sélectionner le poste approprié et l'affectation sera effectuée avec succès. 
+            </p>
+
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">étape1: choisissez un employé</h6>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered table_idhe" width="100%" cellspacing="0">
+                    <thead>
+                      <tr class="table-primary">
+                          <th scope="col">Prénom</th>   
+                          <th scope="col">Nom</th>
+                          <th scope="col">Titre de poste</th>
+                          <th scope="col">Affecter un poste</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr class="table-primary">
+                          <th scope="col">Prénom</th>   
+                          <th scope="col">Nom</th>
+                          <th scope="col">Titre de poste</th>
+                          <th scope="col">Affecter un poste</th>
+                      </tr>
+                    </tfoot>
+                    <tbody>
+                      {% for employe in employes %}
+                        {% if employe.getNaffectation() == null %}
+                          <tr class="table-warning">
+                            <td>{{employe.prenom}}</td>
+                            <td>{{employe.nom}}</td>
+                            <td>{{employe.getTitrePoste()}}</td>
+                            
+                            <td>
+                              <button onclick="clickedone({{employe.id}})" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">Choisir</button>
+          
+                            </td>
+                          </tr>
+                        {% endif %}
+                            
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>   
+      </div>
+        
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+          <h5 class="m-0 font-weight-bold text-primary" id="offcanvasExampleLabel">étape 2: choisissez un poste</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+        
+          <ul class="nav nav-tabs" role="tablist">
+            {% for plateau in plateaux %}
+                  <li class="nav-item" role="presentation">
+                      <a class="nav-link" data-bs-toggle="tab" href="#plateau{{plateau.id}}" aria-selected="true" role="tab" >{{plateau.id}}</a>
+                  </li>
+            {% endfor %}
+          </ul>
+
+          <div id="myTabContent" class="tab-content">
+              {% for plateau in plateaux %}
+                {% set  postes = plateau.getPostes()%}
+                    <div class="tab-pane fade" id="plateau{{plateau.id}}" role="tabpanel">
+                        <div class="table-responsive">
+                        <table class="table table-bordered table_idhe"  width="100%" cellspacing="0">
+                            <thead>
+                                <tr class="table-primary">
+                                    <th scope="col">Numéro de poste</th>   
+                                    <th scope="col">Numéro de plateau</th>
+                                    <th scope="col">Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for poste in postes %}
+                                    {% if  ((plateau.id) == (poste.plateau.id)) and (poste.getNaffectation() == null) %} 
+                                <tr class="table-warning">
+                                    <td>{{poste.getNPoste()}}</td>
+                                    <td>{{poste.plateau.id}}</td>
+                                    <td>
+                                        <button onclick="clickedtwo({{poste.id}})" id="btn" class="btn btn-primary" type="button" >Choisir</button>
+                                    </td>
+                                </tr>
+
+                                    {% endif %} 
+                                {% endfor %}         
+                            </tbody>
+            
+                        </table>
+                        </div>
+                    </div>
+              {% endfor %}
+          </div>
+           <form action="" method="POST" onsubmit="return valider() ">
+            <input type="hidden" value ="" id= "employe" name="employe">
+            <input type="hidden" value ="" id= "poste" name="poste" required>
+            <button type="submit" class="btn btn-warning" >Valider</button>
+
+        </form>               
+        </div>
+       
+      </div>
+    </div>
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>      
+                
+    <script>
+      function clickedone(emp){
+          
+        document.getElementById("employe").value = emp;
+      
+      }
+
+      function clickedtwo(post){
+        document.getElementById("poste").value = post;
+      
+      }
+      function valider(){
+  
+        if(document.getElementById("poste").value !=="") {
+          return true;
+          }
+        else {
+          alert('vous devez choisir un poste!!');             
+          return false;
+        }
+
+      }
+    </script>
+     <script src="vendor/jquery/jquery.min.js"></script>
+     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src=" {{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+    <script src=" {{asset('js/sb-admin-2.min.js')}}"></script> 
+    <script src="  {{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="  {{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="  {{asset('js/demo/datatables-demo.js')}}"></script>
+    <script>
+        $(document).ready( function () {
+            $('.table_idhe').DataTable();
+        } );
+    </script>
+
+   
+        
+
+    {% endblock %}

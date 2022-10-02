@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    
+    <p><em>De : admin@noreplay.com</em></p>
+    <p><em>à : {{employe.email}}</em></p>
+    <p><em>Objet : Création du compte</em></p>
+    <p><em>Date : {{date | date('d/m/y')}}</em>
+    <div >
+        <h1>Bonjour **{{employe.prenom}}  {{employe.nom}}**</h1>
+        <p>-Nous avons le plaisir de vous informer que  vous disposez désormais d'un compte sur
+         <a href="http://localhost:8081/projets_symfony/GestionPoste/public">PosteAlten.com</a>
+         , ce compte vous permettre de bénéficier de plusieurs  services :
+         </p>
+         <p>-Pour vous connecter, utilisez les informations suivantes :<br>
+            <ul>
+                <li><strong>E-mail: </strong><mark>{{employe.email}}</mark></li>
+                <li><strong>Mot de passe :</strong><mark> {{password}}</mark></li>
+            </ul>
+        
+        </p>
+
+    </div>
+    
+</body>
+</html>

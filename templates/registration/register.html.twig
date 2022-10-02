@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<style type="text/css">
+    body{
+        
+        background:url('../public/images/RC_img.jpg') fixed no-repeat;
+        background-size: 100%;
+        color:white;   
+    }
+    h1{
+        text-align: center;
+        color: white;
+    }
+    .well{
+        background:rgba(10,5,3,0.4);
+        border:none;
+        border-radius:15px/15px;
+        box-shadow:0px 10px 20px #446e9b 
+    }
+    .inputs {
+        background: rgba(10,5,3,0.4);
+        color:rgb(221, 243, 250);
+    }
+
+    label{
+        font-weight:bold;
+    }
+    .buttonHolder{ text-align: center; }
+    .navbar{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    }
+</style>
+
+    
+<section class="container my-5 pt-0 col-lg-offset-3 col-lg-6">
+    <div class="row ">
+        <div class="col h-100 ">
+          <div class="well">
+
+            {{ form_start(registrationForm) }}
+                <h1 class="h2 mb-4 text-white">S'inscrire</h1>
+               
+                <div class="form-group">
+                 {{form_row(registrationForm.prenom)}}
+                </div>
+                <div class="form-group my-1">
+                    {{form_row(registrationForm.nom) }}
+                </div>
+                <div class="form-group my-1">
+                    {{form_row(registrationForm.departement) }}
+                </div>
+                <div class="form-group my-1">
+                    {{ form_row(registrationForm.email) }}
+                </div>
+                
+                <div class="form-group my-1">
+
+                    {{ form_row(registrationForm.plainPassword, {
+                    label: 'Mot de passe'
+                }) }}
+                </div>
+
+                <div class="form-group my-1">
+                    {{ form_row(registrationForm.rgbdConsent) }}
+                </div>
+
+                <div class="buttonHolder ">
+                    <button type="submit" class="btn btn btn-lg btn-primary my-4">s'inscrire</button>
+                 </div>
+            {{ form_end(registrationForm) }}
+             
+            </div>
+        </div>
+    </div
+</section>
+
+{% endblock %}

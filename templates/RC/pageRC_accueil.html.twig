@@ -1,0 +1,70 @@
+{% extends "RC/baseRC.html.twig" %}
+     
+    {% block ContentRC %}
+    
+        <style>
+            .card{
+                color: #777;
+                
+                }
+            .card-header {
+                background: linear-gradient(90deg, red 0%,yellow 100%) ;
+                font-size: 3em;
+                -webkit-background-clip :text;
+                -webkit-text-fill-color:transparent;
+                text-align : center;
+                font-weight:bold;
+            }
+            #content{
+                background-color: rgba(0,0,0,.03);
+            }
+            .card-title{
+                font-size: 1.5em;
+            }
+            .card-title .employe{
+                
+                color:#3399f3;
+            }
+            
+            
+        </style>
+       
+
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <div id="content">
+                <div class="card mb-3">
+                        <h3 class="card-header ">Département : {{departement}}</h3>
+                        <div class="card-body">
+                            <h5 class="card-title">Bonjour <span class="employe">{{prenom}}  {{nom}} !</span></h5>
+                            <h6 class="card-subtitle text-muted">Responsable des compétences chez ALTEN</h6>
+                        </div>
+                        <img src="{{asset('images/altenRC.jpg')}}" alt="photo">
+
+                        <div class="card-body">
+                            <p class="card-text h5">le groupe alten vous souhaite une bonne journée </p>
+                        </div>
+                        
+                        <div class="card-footer text-muted">
+                            <figure class="text-center">
+                               <blockquote class="blockquote">
+                                    <p class="mb-0 text-black">« Les meilleures choses qui arrivent dans le monde de l'entreprise ne sont pas le résultat du travail d'un seul homme. C'est le travail de toute une équipe. »</p>
+                                
+                                </blockquote>
+                                <figcaption class="blockquote-footer">
+                                    Par __ <cite title="Source Title h5">Steve Jobs.</cite>
+                                </figcaption> 
+                            </figure>
+                        </div>
+                </div>                       
+            </div>
+        </div>
+     <script src="vendor/jquery/jquery.min.js"></script>
+     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script> 
+    {% endblock %}
+                    
+
+          
+    

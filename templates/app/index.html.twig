@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Postes
+
+{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" type="text/css" href="{{asset('css/index.css')}}">
+
+    <section id="home" >
+        <div class="container text-center  ">
+            <div class="row justify-content-center ">
+                <div class="col-md-10">
+                    <h1 class="display-5">Accès au poste</h1>
+                    <div class="hline"></div>
+                    <blockquote class="blockquote mb-20 h-75">
+                        <span class="col-6 col-md-3" id="typed"></span>                
+                    </blockquote>               
+                </div>
+                
+            </div>
+            <a href="#services" class="btn btn-warning btn-lg ">Découvrir</a>
+        </div>
+    
+    
+    </section>
+    <section id="services">
+        <div class="container">
+            <div class="col-12 section-intro">
+                <h1 class="text-white">Les services :</h1>
+                <div class="hline"></div>
+            </div>
+        </div>
+
+        <div id="prestations">
+            <div class="espace">
+                <div class="icon-box">
+                    <i class='bx bxs-user bx-lg bx-burst-hover'></i>
+                </div>
+                <h4 class="title-sm my-4" >Espace Employé</h4>
+                <div class="btn-choix ">
+                    <a href="{{path('app_login')}}" class="btn btn-warning btn-sm ">Connexion</a>
+                </div>
+            </div>
+        
+            <div class="espace ">   
+                 <div class="icon-box">
+                    <i class='bx bxs-user bx-lg bx-burst-hover'></i>
+                </div>
+                <h4 class="title-sm my-4" >Espace RC</h4>
+                <div class="btn-choix ">
+                    <a href="{{path('register_RC')}}" class="btn btn-warning btn-sm ">S'inscrire</a>
+                    <a href="{{path('RC_login')}}" class="btn btn-warning btn-sm ">Connexion</a>
+                </div>
+            </div>
+        </div>
+      
+    </section>
+    
+
+
+<script src="{{asset('js/typed.min.js')}}"></script>
+<script>
+    var typed = new Typed('#typed', {
+    strings: ["Bonjour, ce site a été créé pour vous garantir un accès rapide et facile à vos postes ainsi que d'autres services que vous découvrirez pour une meilleure intégration. "],
+    smartBackspace: true, 
+    typeSpeed: 35,
+  });
+</script>
+
+<style>
+    span{
+        color:#f3ebebe3;}
+</style>
+{% include "includes/footer.html.twig" %}
+
+{% endblock %}

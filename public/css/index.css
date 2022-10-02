@@ -1,0 +1,91 @@
+#home h1{
+    /* font-size: 3.5em; */
+    font-weight:700;
+    text-shadow: black 0.1em 0.1em 0.2em;
+}
+h1.display-5 {
+    color: rgb(225, 146, 67);
+}
+/* #home p{
+    max-width:550px;
+    margin:20px auto;
+    
+} */
+
+#home{
+    background:linear-gradient(rgba(4, 4, 100, 0.3),rgba(4, 4, 100, 0.3)),url('../images/bg_img.jpg');
+    min-height: 80vh;
+    background-size: cover;
+    display : flex;
+    align-items:center;
+    
+}
+
+.section-intro{
+    text-align: center;
+}
+  .hline{
+    width:120px;
+    height: 2px;
+    background-color: rgb(228, 151, 8);
+    margin:16px auto 16px auto;
+}
+
+#services{
+    background-color: rgb(221, 205, 112);
+
+}
+.row{
+    margin-bottom: 40px;
+}
+
+.title-sm{
+    color: rgb(183, 166, 71);
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.icon-box{
+    width:60px;
+    height: 60px;
+    color: rgb(210, 190, 80);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:3em auto;
+    
+}
+
+#prestations{
+
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 30px 10%;
+}
+
+.espace {
+    box-shadow: 5px 8px 5px 4px rgba(0,0,0,0.83); 
+    border-radius: 10px;
+    background-color: rgba(231, 231, 218, 0.954);
+    width: 30%;
+    height: 20em;
+}
+
+.btn-choix{
+    display:flex;
+    flex-wrap: wrap;
+
+    justify-content: space-around;
+    margin-top:2em ;
+}
+
+.navbar{
+    position: sticky;
+   top: 0;
+   z-index: 100;
+}
+
+/* .well{} */
+

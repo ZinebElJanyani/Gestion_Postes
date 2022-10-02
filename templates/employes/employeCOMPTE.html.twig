@@ -1,0 +1,98 @@
+{% extends "base.html.twig" %}
+
+    {% block title %}
+    {% endblock %}
+
+    {% block body %}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+
+<script>
+    var tab= new Array(3);
+    tab[0]="rgba(255, 0, 0, 0.6)";
+    tab[1]="rgba(0, 0, 255, 0.6)";
+    tab[2]="rgba(255, 255, 0, 0.6)";
+    const bubbleMaker = () =>{
+
+    const bubble = document.createElement("spane");
+    bubble.classList.add("bubble");
+    document.body.appendChild(bubble);
+    const size = Math.random()*200 + 100 +"px";
+    bubble.style.height = size;
+    bubble.style.width = size;
+
+    bubble.style.setProperty("--val",Math.random()*100 + "%");
+    var couleur="orange" ;
+    if(Math.random() <= 0.3 ){
+        couleur= tab[0];
+    }else if(0.3>Math.random() <= 0.6){
+        couleur= tab[1];
+    }else{
+        couleur= tab[2];
+    }
+    bubble.style.setProperty("--color",couleur );
+
+    bubble.style.top = Math.random()*100 + 50 + "%";
+    bubble.style.left = Math.random()*100 +  "%";
+    const plusMinus = Math.random() > 0.5 ? 1 : -1;
+    bubble.style.setProperty("--left",Math.random()*100*plusMinus + "%");
+
+    }
+    setInterval(bubbleMaker,400);
+</script>
+
+<link rel="stylesheet" href="{{asset('css/employeCOMPTE.css')}}"> 
+ <link rel="stylesheet" href="{{asset('ff/css/all.css')}}"> 
+   
+   <script  src="asset('ff/js/all.js')"></script>
+
+<section class="container my-5 py-0 col-lg-offset-3 col-lg-6 lala">
+    <div class="row ">
+        <div class="col h-100 ">
+        <h1 class="my-2">{{user.prenom}}  {{user.nom}} </h1>
+        <h6 class="mb-2">{{user.getTitrePoste()}} chez ALTEN</h6>
+        <table>
+        <tr>
+            <td><strong>E-mail: </strong></td>
+            <td>{{user.email}} </td>
+        </tr>
+
+        <tr>
+            <td><strong>Département  : <strong></td>
+            <td>{{user.departement.getNomD()}} </td>
+        </tr>
+        <tr>
+            <td><strong>Responsable de compétences  :<strong> </td>
+            <td>{{user.departement.getRCuser().prenom}} {{user.departement.getRCuser().nom}}</td>
+        </tr>
+        <tr>
+            <td><strong>Email de RC  :</strong> </td>
+            <td>{{user.departement.getRCuser().email}} </td>
+        </tr>
+        
+         {% if user.getNaffectation() != null %}
+         <tr>
+            <td><strong>Poste  :</strong></td>
+            <td>{{user.getNaffectation().poste.getNPoste()}} </td>
+        </tr>
+        <tr>
+            <td><strong>Plateau  :</strong></td>
+            <td>{{user.getNaffectation().poste.getPlateau().id}} </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td><strong>Poste :</strong></td>
+            <td><i class="fa-solid fa-spinner"></i></td>
+        </tr>
+        {% endif %}
+
+        </table>
+        </div>
+    </div>
+</section>
+<div class="button"><a href="{{path('page_empl')}}" ><div class="scrollToTop-link show " id="scrollToTop"><span class="bi bi-arrow-left fa-lg bx-border-circle bx-fade-left-hove "></span></div></a></div>
+
+
+
+    {% endblock %}

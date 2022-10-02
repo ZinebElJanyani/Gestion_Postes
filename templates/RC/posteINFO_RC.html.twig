@@ -1,0 +1,152 @@
+{% extends "RC/baseRC.html.twig" %}
+                
+    {% block ContentRC %}
+        <style>
+        h1{
+            text-align: center;
+            background: linear-gradient(359deg, #00ffe7 0%,#0200ff 100%);
+            font-size: 3em;
+            -webkit-background-clip :text;
+            -webkit-text-fill-color:transparent;
+            text-align : center;
+            font-weight:bold;
+        }
+        .navbar{
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        } 
+        .bg{
+
+            width:100%;
+        }
+   </style>
+    <div id="wrapper" class="bg">
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <div class="container-fluid" id="page-top">
+                    <h1 class="h3 my-3">La liste des postes</h1>
+                    
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">la liste des postes occupés </h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table_idhe"  width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr class="table-primary">
+                                            <th scope="col">Numéro de poste</th>   
+                                            <th scope="col">Numéro du plateau</th>
+                                            <th scope="col">Occupé depuis </th>
+                                            <th scope="col">Occupé par</th>
+                                            <th scope="col">Durée d'occupation</th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                        {% for poste in postes %}
+                                            {% if poste.getNaffectation() != null %}
+                                            <tr class="table-warning">
+                                                <td>{{poste.getNPoste()}}</td>
+                                                <td>{{poste.plateau.id}}</td>
+                                                <td>{{poste.getNaffectation().getDateAffectation() | date('d/m/y')}}</td>
+                                                <td>{{poste.getNaffectation().employe.prenom}} {{poste.getNaffectation().employe.nom}}</td>
+                                                <td>  
+                                                    {% set startDate = poste.getNaffectation().getDateAffectation() | date('y-m-d') %}
+                                                    {% set now_date ="now"|date("m/d/Y")  %}
+                                                    {% set difference = date(startDate).diff(date(now_date)) %}
+                                                    {% set leftDays = difference.days %}
+                                                    {% set leftyears = difference.y %}
+                                                    {% set leftmounths = difference.m %}
+                                                
+                                                    {% if leftyears == 1 %}
+                                                    une année ,
+
+                                                    {% elseif (leftyears != 0) %}
+                                                   
+                                                        {{ leftyears }} années ,
+                                                    {% endif %}
+                                                    
+                                                    {% if (leftmounths < 12) and (leftmounths != 0) %}
+                                                        {{leftmounths}} mois ,
+                                                    {% endif %} 
+                                                
+                                                    {% if (leftDays < 30) and (leftDays != 0)%}
+                                                        {{ leftDays }} jours
+                                                    {% endif %} 
+                                                            
+                                                </td>   
+                                                
+                                            </tr>
+                                            
+                                            {% endif %}   
+
+                                        {% endfor %}
+                                    </tbody>
+        
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                      <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">la liste des postes disponibles </h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table_idhe"  width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr class="table-primary">
+                                            <th scope="col">Numéro de poste</th>   
+                                            <th scope="col">Numéro du plateau</th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                    {% for poste in postes %}
+                        
+                                        {% if poste.getNaffectation() == null %}
+                                        <tr class="table-warning">
+                                            <td>{{poste.getNPoste()}}</td>
+                                            <td>{{poste.plateau.id}}</td>
+                                            
+                                        </tr>
+                                        
+                                        {% endif %}   
+
+                                    {% endfor %}
+                                    </tbody>
+        
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+
+            </div>
+        </div>   
+    </div>
+   
+      
+<a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a> 
+ 
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src=" {{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+    <script src=" {{asset('js/sb-admin-2.min.js')}}"></script> 
+    <script src="  {{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="  {{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="  {{asset('js/demo/datatables-demo.js')}}"></script>
+    <script>
+        $(document).ready( function () {
+            $('.table_idhe').DataTable();
+        } );
+    </script>
+    {% endblock %}

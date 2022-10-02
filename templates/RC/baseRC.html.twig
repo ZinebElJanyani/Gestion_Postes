@@ -1,0 +1,101 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+{% endblock %}
+
+{% block body  %} 
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+    <style>
+        .navbar{
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        }
+    </style>
+
+    <div id="wrapper">
+
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <a class="sidebar-brand  align-items-center justify-content-center mb-5" href="{{path('page_RC')}}">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="bi bi-briefcase-fill"></i>
+                </div>
+                <div class="sidebar-brand-text mx-2 ">RESPONSABLE DE COMPETENCES</div>
+            </a>
+            <hr class="sidebar-divider my-0">
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading pt-10">
+                Intefaces
+            </div>
+            <li class="nav-item active ">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                    aria-controls="collapseOne">
+                    <i class="bi bi-people-fill"></i>
+                    <span >Employés</span>
+                </a>
+                <div id="collapseOne" class="collapse " aria-labelledby="headingOne"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">La gestion des employés</h6>
+                        <a class="collapse-item " href="{{path('RC_ajoutEMP')}}"><i class="bi bi-person-plus-fill"></i> Ajouter</a>
+                        <a class="collapse-item" href="{{path('RC_showEMP')}}"><i class="fas fa-fw fa-wrench"></i> Operations</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+                    aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span >Postes</span>
+                </a>
+                <div id="collapseTwo" class="collapse " aria-labelledby="headingTwo"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">La gestion des postes</h6>
+                        <a class="collapse-item" href="{{path('RC_showPLAT')}}"><i class="bi bi-caret-right-fill"></i> Plateaux</a>
+                     <a class="collapse-item " href="{{path('RC_showPOSTE')}}"><i class="bi bi-caret-right-fill"></i> Postes</a>
+                    </div>
+                </div>
+            </li>
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Services
+            </div>
+            <li class="nav-item active">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="bi bi-clipboard-check-fill"></i>
+                    <span>Affecter un poste</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <a class="collapse-item" href="{{path('RC_affectation')}}"><i class="bi bi-check-circle-fill"></i> Affecter un poste</a>
+                        <a class="collapse-item" href="{{path('RC_showAFFEC')}}"><i class="bi bi-clipboard-data-fill"></i> Affectations</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{path('RC_postesINFO')}}">
+                    <i class="bi bi-info-circle-fill"></i>
+                    <span>Informations sur les postes</span></a>
+            </li>
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+                    
+        {% block ContentRC %}
+        
+            {% endblock %}
+    </div>
+        
+
+{% endblock %}
